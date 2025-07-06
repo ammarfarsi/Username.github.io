@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>عيد ميلاد شذى 💖</title>
+  <style>
+    body { margin:0;padding:0;background:linear-gradient(to bottom,#ffe6f0,#ffffff);font-family:'Cairo',Tahoma,sans-serif;text-align:center;overflow-x:hidden;color:#d63384; }
+    h1 { font-size:48px;margin-top:50px; }
+    h2 { font-size:28px;color:#ff3399;margin-bottom:30px; }
+    .cake { font-size:100px;margin:20px 0; }
+    iframe { margin-top:20px;border-radius:10px;box-shadow:0 0 15px #f6c;width:90%;max-width:400px;height:225px; }
+    .footer { margin-top:40px;font-size:16px;color:#999;position:relative;z-index:1; }
+    canvas { position:fixed;top:0;left:0;pointer-events:none;z-index:0; }
+  </style>
+</head>
+<body>
+  <h1>🎉 عيد ميلاد سعيد 🎉</h1>
+  <h2>شذى البوسعيدي 💖<br>أميرة قلبي وأميرة دمشق 🇸🇾👑</h2>
+  <div class="cake">🎂🎈🎊</div>
+  <p>🎵 استمعي لأغنيتكِ المفضلة:</p>
+  <iframe src="https://www.youtube.com/embed/6hYoL3KmbpM?si=MGW0ALoT12kF8zkJ"
+          title="عيد ميلاد سعيد - شذى"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+  </iframe>
+  <div class="footer">صممت خصيصًا لكِ من القلب 💌</div>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d'), hearts=[];
+    function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+    window.addEventListener('resize', resizeCanvas); resizeCanvas();
+    function createHeart(){return{ x:Math.random()*canvas.width, y:-20, size:Math.random()*20+10, speed:Math.random()*2+1, color:`rgba(255,102,153,${Math.random()})` }; }
+    function drawHeart(h){ctx.beginPath();ctx.moveTo(h.x,h.y);ctx.bezierCurveTo(h.x,h.y-h.size/2,h.x-h.size,h.y-h.size/2,h.x-h.size,h.y);ctx.bezierCurveTo(h.x-h.size,h.y+h.size/1.5,h.x,h.y+h.size,h.x,h.y+h.size*1.5);ctx.bezierCurveTo(h.x,h.y+h.size,h.x+h.size,h.y+h.size/1.5,h.x+h.size,h.y);ctx.bezierCurveTo(h.x+h.size,h.y-h.size/2,h.x,h.y-h.size/2,h.x,h.y);ctx.fillStyle=h.color;ctx.fill();}
+    function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);hearts.forEach((h,i)=>{h.y+=h.speed;h.x+=Math.sin(h.y/20);if(h.y>canvas.height+50)hearts.splice(i,1);drawHeart(h);});while(hearts.length<60)hearts.push(createHeart());requestAnimationFrame(animate);}
+    animate();
+  </script>
+</body>
+</html>
